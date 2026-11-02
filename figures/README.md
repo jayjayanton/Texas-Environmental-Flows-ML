@@ -1,12 +1,19 @@
 # Figures
 
-These are the original PNG images embedded in the Baylor research notebooks, saved directly as PNG rather than wrapped in SVG.
+I kept the plots from my original Baylor notebooks here so it's easier to see what the models were doing without opening the notebooks.
 
-- [Ten ecoregion inflection-point panels](ecoregion_inflection_panels.png) — original regression-tree notebook output (cell 6).
-- [All ecoregions combined](all_ecoregions_comparison.png) — original regression-tree notebook output (cell 9).
-- [Ecoregion 4 HIT metric curves](ecoregion_4_hit_metric_curves.png) — original regression-tree notebook output (cell 11).
-- [Random Forest feature importance](random_forest_feature_importance.png) — original classification notebook output (cell 24).
+## HIT metrics and inflection points
 
-These are historical notebook exports at their original resolution. They have **not** been recomputed at higher DPI. To generate higher-resolution plots from data, rerun the analysis using the plotting scripts and the authorized original data. Enlarging an existing notebook PNG does not increase its information content.
+- [Ten ecoregion panels](ecoregion_inflection_panels.png) — I compared the mean regression R² across tree depths for each ecoregion and marked candidate inflection points.
+- [All ecoregions combined](all_ecoregions_comparison.png) — I plotted the ecoregion curves together to compare their behavior.
+- [Ecoregion 4 HIT metric curves](ecoregion_4_hit_metric_curves.png) — I examined the individual HIT metric curves for one ecoregion.
 
-Tabular results are in [tables](../tables/), not this directory. The Random Forest confusion matrix is documented there as counts rather than retained as an SVG.
+The inflection points describe changes in the model score curves as tree depth increases. I wouldn't treat them as confirmed ecological thresholds without further analysis.
+
+## Stream classification
+
+- [Random Forest feature importance](random_forest_feature_importance.png) — this plot comes from my original stream classification notebook and shows which predictors received the greatest importance in that model.
+
+These are the original PNGs saved in my notebooks, so the resolution is limited by those exports. I haven't regenerated them from the underlying datasets.
+
+I keep the numerical results and CSV files in the [tables folder](../tables/).
