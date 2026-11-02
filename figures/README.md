@@ -25,8 +25,8 @@ I then averaged the scores across metrics within an ecoregion to compare how exp
 ### Original notebook figures
 
 - [Ten ecoregion panels](ecoregion_inflection_panels.png) — I plotted the mean R² versus tree depth separately for each of the ten ecoregions, with candidate changes in curve curvature.
-- [All ecoregions combined](all_ecoregions_comparison.png) — I overlaid the mean R² curves to compare how model fit changed with depth across regions.
-- [Ecoregion 4 HIT metric curves](ecoregion_4_hit_metric_curves.png) — I overlaid the R²-versus-depth curves for the individual HIT metrics in Ecoregion 4. This includes many more than four curves; the *4* refers to the ecoregion number. The original notebook labels this section as comparing **171 HIT metrics**, while an earlier input-selection step used 130 predictors. The exact count plotted should be verified against the original run data.
+- [Ecoregion 4 HIT metric curves](ecoregion_4_hit_metric_curves.png) — I used Ecoregion 4 as an example to show the individual R²-versus-depth curves before averaging the scores across HIT metrics. This figure contains many overlapping lines, each corresponding to a different HIT metric. I then averaged the available metric scores at each depth to produce one representative curve for the ecoregion. The original notebook describes this section as comparing 171 HIT metrics, while an earlier input-selection step uses 130 predictors; the exact number plotted would need to be confirmed from the original run data.
+- [All ecoregions combined](all_ecoregions_comparison.png) — After calculating the mean R² curve separately for each ecoregion, I overlaid all ten curves to compare how model fit changed with tree depth across regions.
 
 ## Stream classification
 
