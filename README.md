@@ -16,13 +16,15 @@ I used Random Forest to identify streams classified as reference or non-referenc
 
 The current `scripts/stream_reference_random_forest.py` uses a classifier instead. It separates training and test data, handles missing values within the modeling pipeline, evaluates the predictions, and can apply the trained model to another dataset. Since the modeling approach changed, its results won't necessarily match my original notebook.
 
-## HIT metrics and fish responses
+## Why I averaged the HIT metric curves
 
-I also explored how individual hydrologic alteration metrics relate to fish response variables across Texas ecoregions.
+My goal was to compare how the decision-tree regressions behaved across Texas ecoregions without relying on a single HIT metric. I first fit a separate multi-output regression for each HIT metric in each ecoregion, using multiple fish response variables as the targets. I repeated each regression across increasing tree depths and recorded its in-sample R². This produced many R²-versus-depth curves within each ecoregion, like those shown in the [Ecoregion 4 plot](figures/ecoregion_4_hit_metric_curves.png).
 
-In `scripts/metric_depth_sweep.py`, I fit multi-output decision trees for each metric across a range of tree depths and recorded the training R² scores. I then used `scripts/analyze_depth_runs.py` to compare the mean scores by depth and identify possible inflection points in those curves.
+To summarize those individual runs, I grouped the results by ecoregion and tree depth, then calculated the **mean R² across the metrics available at each depth**. This gave me one average curve per ecoregion, making it easier to compare the general pattern of model fit as tree complexity increased. The average was taken across **model scores**, not across the underlying fish observations or HIT values.
 
-Here, tree depth is the number of successive decision splits a tree is allowed to make from its root to a leaf. As I increased the depth, each tree could fit increasingly detailed patterns in a single HIT metric. I plotted the resulting **training R² against tree depth** for each metric and then averaged those curves by ecoregion. The Ecoregion 4 plot contains multiple overlapping lines because each line corresponds to a different HIT metric; the 4 names the ecoregion, not the number of curves. I used changes in the curvature of the average R²-versus-depth curves to identify exploratory inflection points. These reflect changes in model fit as complexity increases, not necessarily ecological thresholds or validated predictive performance. The [figures README](figures/README.md) explains these plots in more detail.
+I then calculated numerical derivatives of each average curve and flagged changes in the sign of its second derivative as candidate inflection points. That's how I produced the [ten-ecoregion panels](figures/ecoregion_inflection_panels.png) and the [combined comparison](figures/all_ecoregions_comparison.png). I wanted to see whether the shape of the depth-versus-fit relationship differed between ecoregions and where improvements in training fit changed.
+
+An important limitation is that the original depth sweep stops recording scores for some metrics once their fitted trees stop getting deeper. That means the number of metrics contributing to the average may change with depth, potentially affecting the shape of the curve. Also, these are **training R² curves**, so an inflection point reflects the model-fitting behavior and should not be interpreted by itself as a biological threshold or as evidence of out-of-sample predictive performance.
 
 ## Figures and results
 
