@@ -22,7 +22,7 @@ I also explored how individual hydrologic alteration metrics relate to fish resp
 
 In `scripts/metric_depth_sweep.py`, I fit multi-output decision trees for each metric across a range of tree depths and recorded the training R² scores. I then used `scripts/analyze_depth_runs.py` to compare the mean scores by depth and identify possible inflection points in those curves.
 
-I was interested in where the relationship between model complexity and explained variance changed. These inflection points are exploratory indicators in the model-performance curves, not automatically ecological thresholds.
+Here, tree depth is the number of successive decision splits a tree is allowed to make from its root to a leaf. As I increased the depth, each tree could fit increasingly detailed patterns in a single HIT metric. I plotted the resulting **training R² against tree depth** for each metric and then averaged those curves by ecoregion. The Ecoregion 4 plot contains multiple overlapping lines because each line corresponds to a different HIT metric; the 4 names the ecoregion, not the number of curves. I used changes in the curvature of the average R²-versus-depth curves to identify exploratory inflection points. These reflect changes in model fit as complexity increases, not necessarily ecological thresholds or validated predictive performance. The [figures README](figures/README.md) explains these plots in more detail.
 
 ## Figures and results
 
