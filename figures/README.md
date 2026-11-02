@@ -2,6 +2,16 @@
 
 I saved these plots from my original environmental flows notebooks to show how I explored stream classification and the relationships between hydrologic alteration (HIT) metrics and fish responses.
 
+## How I got from individual metrics to the inflection-point figures
+
+I started by fitting a multi-output decision-tree regression separately for each HIT metric in each ecoregion. For each metric, I varied the maximum tree depth and recorded the training R². The [Ecoregion 4 plot](ecoregion_4_hit_metric_curves.png) shows those individual metric curves overlaid. I used that plot to inspect how their fit changed as the trees became more complex.
+
+I then grouped the runs by **tree depth** within each ecoregion and calculated the **average R² across the metrics with a recorded score at that depth**. This turned the many individual curves into one representative average R²-versus-depth curve for each ecoregion. I was averaging the model scores, not the fish responses themselves.
+
+Next, I applied numerical derivatives to each average curve. I flagged sign changes in the second derivative as candidate inflection points, which helped me investigate where the curvature of the average model-fit trend changed. Those curves became the [ten-ecoregion panels](ecoregion_inflection_panels.png), and I also plotted the averages together in the [combined ecoregion figure](all_ecoregions_comparison.png).
+
+I used this approach to compare broad model behavior across ecoregions instead of selecting one HIT metric as representative of an entire region. The results remain exploratory: deeper trees can overfit, the number of metrics in each depth-wise average can change as individual trees stop splitting, and curvature changes in training R² are not automatically ecological thresholds.
+
 ## HIT metrics, tree depth, and inflection points
 
 For each Texas ecoregion, I ran multi-output decision-tree regressions using individual HIT metrics to predict multiple fish response variables. I tested increasing maximum tree depths and recorded the **in-sample R²** for each run.
