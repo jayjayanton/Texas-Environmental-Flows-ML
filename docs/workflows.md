@@ -28,7 +28,11 @@ The newer script uses a stratified training/test split and fills missing values 
 
 ## HIT metrics and fish responses
 
-For the fish-response analysis, I tested individual HIT metrics using multi-output decision-tree regression across Texas ecoregions. I compared the R² scores at different maximum tree depths and then examined changes in the curvature of the mean score curves.
+For the HIT metric analysis, I first ran a separate multi-output decision-tree regression for each HIT metric in each ecoregion, predicting multiple fish response variables. I repeated these fits across increasing maximum tree depths and recorded the in-sample R². This gave me a set of model-fit curves for each ecoregion.
+
+I then grouped the results by depth and calculated the mean R² across the metrics with available results at that depth. That was how I reduced many individual curves into one average R²-versus-depth curve per ecoregion. I used numerical second derivatives to flag candidate changes in curvature, plotted each ecoregion's average curve with its inflection candidates, and compared the curves together.
+
+My aim was to understand whether the overall pattern of model fit changed at different depths and how those patterns compared across ecoregions. Because the scores were calculated on training data, and because the contributing metrics could vary by depth, I treated these points as exploratory indicators rather than validated ecological thresholds.
 
 ```bash
 python scripts/metric_depth_sweep.py --input data/pre_tree_rerun.RData --output-dir outputs
